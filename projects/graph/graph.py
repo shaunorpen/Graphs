@@ -40,6 +40,7 @@ class Graph:
         while q.size() > 0:
             current_vertex = q.dequeue()
             if current_vertex not in visited_vertices:
+                print(current_vertex)
                 visited_vertices.append(current_vertex)
                 for next_vertex in self.vertices[current_vertex]:
                     q.enqueue(next_vertex)
@@ -59,6 +60,7 @@ class Graph:
         while s.size() > 0:
             current_vertex = s.pop()
             if current_vertex not in visited_vertices:
+                print(current_vertex)
                 visited_vertices.append(current_vertex)
                 for next_vertex in self.vertices[current_vertex]:
                     s.push(next_vertex)
@@ -88,6 +90,7 @@ class Graph:
             if stack.size() > 0:
                 current_vertex = stack.pop()
                 if current_vertex not in visited:
+                    print(current_vertex)
                     visited.append(current_vertex)
                     for next_vertex in self.vertices[current_vertex]:
                         stack.push(next_vertex)
