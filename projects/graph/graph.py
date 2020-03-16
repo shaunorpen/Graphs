@@ -13,33 +13,53 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
+        self.vertices[vertex_id] = set()
 
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
-        pass  # TODO
+        self.vertices[v1].add(v2)
 
     def get_neighbors(self, vertex_id):
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        return self.vertices[vertex_id]
 
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        q = Queue()
+        q.enqueue(starting_vertex)
+
+        visited_vertices = set()
+
+        while q.size() > 0:
+            current_vertex = q.dequeue()
+            if current_vertex not in visited_vertices:
+                visited_vertices.add(current_vertex)
+                for next_vertex in self.vertices[current_vertex]:
+                    q.enqueue(next_vertex)
 
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        s = Stack()
+        s.push(starting_vertex)
+
+        visited_vertices = set()
+
+        while s.size() > 0:
+            current_vertex = s.pop()
+            if current_vertex not in visited_vertices:
+                visited_vertices.add(current_vertex)
+                for next_vertex in self.vertices[current_vertex]:
+                    s.push(next_vertex)
 
     def dft_recursive(self, starting_vertex):
         """
