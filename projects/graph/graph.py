@@ -155,22 +155,40 @@ class Graph:
 
         This should be done using recursion.
         """
-        def recurse(start, end, path = list(), visited = set()):
-            if len(path) == 0:
-                path.append(start)
-            if path[-1] == end:
-                return path
-            else:
+        s = Stack()
+        s.push([starting_vertex])
+
+        visited = set()
+
+        # while s.size() > 0:
+        #     path = s.pop()
+        #     last_vertex = path[-1]
+        #     if last_vertex not in visited:
+        #         if last_vertex == destination_vertex:
+        #             return path
+        #         else:
+        #             visited.add(last_vertex)
+        #             for next_vertex in self.vertices[last_vertex]:
+        #                 new_path = [*path, next_vertex]
+        #                 s.push(new_path)
+
+        def recurse(start, end, stack, visited):
+            if stack.size() > 0:
+                path = stack.pop()
                 last_vertex = path[-1]
                 if last_vertex not in visited:
-                    visited.add(last_vertex)
-                    for next_vertex in self.vertices[path[-1]]:
-                        new_path = [*path, next_vertex]
-                        recurse(start, end, new_path)
-
-        return recurse(starting_vertex, destination_vertex)
-
-
+                    if last_vertex == end:
+                        return path
+                    else: 
+                        visited.add(last_vertex)
+                        for next_vertex in self.vertices[last_vertex]:
+                            new_path = [*path, next_vertex]
+                            stack.push(new_path)
+                        return recurse(start, end, stack, visited)
+                else:
+                    return -1
+        
+        return recurse(starting_vertex, destination_vertex, s, visited)
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
@@ -223,8 +241,8 @@ if __name__ == '__main__':
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
     '''
-    print(graph.dft(1))
-    print(graph.dft_recursive(1))
+    # print(graph.dft(1))
+    # print(graph.dft_recursive(1))
 
     '''
     Valid BFS path:
@@ -238,4 +256,4 @@ if __name__ == '__main__':
         [1, 2, 4, 7, 6]
     '''
     # print(graph.dfs(1, 6))
-    # print(graph.dfs_recursive(1, 6))
+    print(graph.dfs_recursive(1, 6))
