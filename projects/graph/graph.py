@@ -35,14 +35,16 @@ class Graph:
         q = Queue()
         q.enqueue(starting_vertex)
 
-        visited_vertices = set()
+        visited_vertices = list()
 
         while q.size() > 0:
             current_vertex = q.dequeue()
             if current_vertex not in visited_vertices:
-                visited_vertices.add(current_vertex)
+                visited_vertices.append(current_vertex)
                 for next_vertex in self.vertices[current_vertex]:
                     q.enqueue(next_vertex)
+                
+        return visited_vertices
 
     def dft(self, starting_vertex):
         """
@@ -52,14 +54,16 @@ class Graph:
         s = Stack()
         s.push(starting_vertex)
 
-        visited_vertices = set()
+        visited_vertices = list()
 
         while s.size() > 0:
             current_vertex = s.pop()
             if current_vertex not in visited_vertices:
-                visited_vertices.add(current_vertex)
+                visited_vertices.append(current_vertex)
                 for next_vertex in self.vertices[current_vertex]:
                     s.push(next_vertex)
+
+        return visited_vertices
 
     def dft_recursive(self, starting_vertex):
         """
