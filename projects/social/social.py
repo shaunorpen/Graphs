@@ -103,8 +103,22 @@ class SocialGraph:
         return visited
 
 if __name__ == '__main__':
-    sg = SocialGraph()
-    sg.populate_graph(10, 2)
-    print(sg.friendships)
-    connections = sg.get_all_social_paths(1)
-    print(connections)
+    # sg = SocialGraph()
+    # sg.populate_graph(10, 2)
+    # print(sg.friendships)
+    # connections = sg.get_all_social_paths(1)
+    # print(connections)
+
+    results = list()
+
+    for i in range(10):
+        sg = SocialGraph()
+        sg.populate_graph(1000, 5)
+        paths = sg.get_all_social_paths(1)
+        total = 0
+        for path in paths.keys():
+            total += len(paths[path])
+        results.append(total / len(paths.keys()))
+    
+    print(results)
+
